@@ -2,6 +2,9 @@
 
 This is a high-performance product landing page built in fulfillment of the Byteex development test requirements.
 
+## Live Demo
+- **URL:** [https://byteex-yn48.vercel.app]
+
 ## Tech Stack
 - **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS v4
 - **CMS:** Sanity v3 (Headless CMS)
