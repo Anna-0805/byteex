@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { urlFor } from "@/app/lib/sanityClient";
 import MobileCtaBlock from "@/components/MobileCtaBlock";
+import ComfortCard from "@/components/ComfortCard";
 
-export default function ComfortSection({ data }: { data: any }) {
+export default function ComfortSection({ data }: { data: Record<string, unknown> }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const features = data?.comfortFeatures || [];
+  const features = (data?.comfortFeatures as Array<Record<string, unknown>>) || [];
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? features.length - 1 : prev - 1));
@@ -17,14 +17,15 @@ export default function ComfortSection({ data }: { data: any }) {
   };
 
   return (
-    <section className="w-full py-8 flex flex-col items-center mx-auto px-8 md:px-20">
-      <div className="w-full max-w-6xl mx-auto px-0 md:px-12 flex flex-col items-center">
+    <section className="w-full pt-12 pb-8 flex flex-col items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-20 flex flex-col items-center">
         <h2 className="text-[26px] md:text-[32px] font-normal text-[#01005B] mb-12 tracking-wide text-center">
           Comfort made easy
         </h2>
 
         {features.length > 0 ? (
           <>
+
             <div className="flex md:hidden items-center justify-between w-full mb-10 relative">
               <button
                 onClick={handlePrev}
@@ -47,46 +48,11 @@ export default function ComfortSection({ data }: { data: any }) {
               </button>
 
               <div className="flex-1 flex justify-center px-2">
-                {(() => {
-                  const feature = features[currentIndex];
-                  const bgClass =
-                    currentIndex === 1 ? "bg-[#F9F0E6]" : "bg-[#F0EEEF]";
-                  return (
-                    <div
-                      className={`flex flex-col justify-center items-center text-center p-8 rounded-[12px] ${bgClass} shadow-sm border border-stone-100 w-full aspect-square max-w-[321px]`}
-                    >
-                      <div className="w-[51px] h-[51px] flex items-center justify-center mb-6 text-[#01005B]">
-                        {feature.icon ? (
-                          <img
-                            src={urlFor(feature.icon).url()}
-                            alt={feature.title || "Feature Icon"}
-                            className="w-[51px] h-[51px] object-contain"
-                          />
-                        ) : (
-                          <svg
-                            className="w-[51px] h-[51px]"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 4v16m8-8H4"
-                            />
-                          </svg>
-                        )}
-                      </div>
-                      <h3 className="text-[22px] font-medium text-[#01005B] mb-3">
-                        {feature.title}
-                      </h3>
-                      <p className="text-[15px] text-[#676869] leading-relaxed max-w-[280px]">
-                        {feature.description}
-                      </p>
-                    </div>
-                  );
-                })()}
+                <ComfortCard
+                  feature={features[currentIndex]}
+                  index={currentIndex}
+                  isMobile={true}
+                />
               </div>
 
               <button
@@ -111,55 +77,23 @@ export default function ComfortSection({ data }: { data: any }) {
             </div>
 
             <div className="hidden md:grid grid-cols-3 gap-8 w-full mb-10">
-              {features.map((feature: any, index: number) => {
-                const bgClasses = index === 1 ? "bg-[#F9F0E6]" : "bg-[#F0EEEF]";
-                return (
-                  <div
-                    key={index}
-                    className={`flex flex-col justify-center items-center text-center p-8 rounded-[12px] ${bgClasses} shadow-sm border border-stone-100 h-[321px]`}
-                  >
-                    <div className="w-[51px] h-[51px] flex items-center justify-center mb-6 text-[#01005B]">
-                      {feature.icon ? (
-                        <img
-                          src={urlFor(feature.icon).url()}
-                          alt={feature.title || "Feature Icon"}
-                          className="w-[51px] h-[51px] object-contain"
-                        />
-                      ) : (
-                        <svg
-                          className="w-[51px] h-[51px]"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 4v16m8-8H4"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                    <h3 className="text-[22px] font-medium text-[#01005B] mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-[15px] text-[#676869] leading-relaxed max-w-[280px]">
-                      {feature.description}
-                    </p>
-                  </div>
-                );
-              })}
+              {features.map((feature: Record<string, unknown>, index: number) => (
+                <ComfortCard
+                  key={index}
+                  feature={feature}
+                  index={index}
+                  isMobile={false}
+                />
+              ))}
             </div>
           </>
         ) : (
           <div className="col-span-3 text-center text-stone-400 text-sm mb-10">
-            Завантаження карток або дані відсутні...
+            Loading cards or data missing...
           </div>
         )}
       </div>
 
-      {/* Кнопка */}
       <div className="block w-full">
         <MobileCtaBlock
           buttonText={data?.buttonText}

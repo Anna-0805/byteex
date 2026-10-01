@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface AboutSectionProps {
   data: {
-    aboutImages?: any[];
+    aboutImages?: Array<Record<string, unknown>>;
     aboutTitle?: string;
     storyTitle?: string;
     storyText?: string;
@@ -18,15 +18,15 @@ export default function AboutSection({ data }: AboutSectionProps) {
   const titleText = data.aboutTitle || data.storyTitle || "Be your best self.";
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-12 max-w-7xl bg-[#F0EEEF] mx-auto w-full">
+    <section className="pt-9 pb-8 md:py-22 bg-[#F0EEEF] mx-auto w-full">
       <h2 className="text-[26px] font-normal text-[#2A2996] mb-8 block xl:hidden text-center w-full">
         {titleText}
       </h2>
 
-      <div className="flex flex-col xl:grid xl:grid-cols-2 gap-8 xl:gap-16 items-center">
-        <div className="relative flex justify-center items-center w-full xl:py-0 py-8">
-          <div className="relative w-full max-w-[381.64px] h-[380px] sm:h-[410px] xl:h-[570px] mx-auto">
-            <div className="absolute top-0 xl:top-[-45px] left-0 xl:left-[-80px] w-[28%] h-[24%] xl:w-[165px] xl:h-[175px] overflow-hidden shadow-lg bg-stone-200 border-[4px] border-[#F0EEEF] z-10">
+      <div className="flex flex-col xl:grid xl:grid-cols-2 gap-8 xl:gap-16 items-center px-6 md:px-20 max-w-7xl mx-auto">
+        <div className="relative flex justify-center items-center w-full xl:py-0 py-2">
+          <div className="relative w-full max-w-[420px] h-[380px] sm:h-[410px] xl:h-[570px] mx-auto">
+            <div className="absolute top-0 xl:top-[-45px] left-0 xl:left-[-80px] w-[109px] h-[111px] xl:w-[165px] xl:h-[175px] overflow-hidden shadow-lg bg-stone-200 border-[4px] border-[#F0EEEF] z-10">
               {data?.aboutImages && data.aboutImages[0] ? (
                 <img
                   src={urlFor(data.aboutImages[0]).url()}
@@ -50,7 +50,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
               )}
             </div>
 
-            <div className="absolute bottom-[-30px] xl:bottom-[-65px] right-0 xl:right-[-80px] w-[30%] h-[24%] xl:w-[128.91px] xl:h-[175px] overflow-hidden shadow-lg bg-stone-200 border-[4px] border-[#F0EEEF] z-20">
+            <div className="absolute bottom-[20px] xl:bottom-[-65px] right-0 xl:right-[-80px] w-[30%] h-[24%] xl:w-[128.91px] xl:h-[175px] overflow-hidden shadow-lg bg-stone-200 border-[4px] border-[#F0EEEF] z-20">
               {data?.aboutImages && data.aboutImages[2] ? (
                 <img
                   src={urlFor(data.aboutImages[2]).url()}
@@ -70,7 +70,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
               {titleText}
             </h2>
 
-            <div className="[&>p]:mb-3 text-[15px] text-[#6C6C6C] md:px-[16px] py-[16px] md:py-[0px] leading-normal">
+            <div className="[&>p]:mb-3 text-[15px] text-[#6C6C6C] px-[24px] md:px-[16px] py-[16px] md:py-[0px] leading-normal">
               {data?.storyText ? (
                 <p className="whitespace-pre-line">{data.storyText}</p>
               ) : (
@@ -81,7 +81,7 @@ export default function AboutSection({ data }: AboutSectionProps) {
 
           <Link
             href={buttonLink}
-            className="bg-[#01005B] hover:bg-[#020080] w-full md:w-[376px] h-[56px] rounded-[5px] text-white font-normal relative hidden md:flex items-center justify-center transition-all mt-6 group"
+            className="bg-[#01005B] hover:bg-[#020080] w-full md:w-[376px] h-[56px] rounded-[5px] text-white font-normal relative hidden xl:flex items-center justify-center transition-all mt-6 group"
           >
             <span className="font-sans font-normal text-[18px] leading-[100%] tracking-[0.03em] text-center">
               {buttonText}

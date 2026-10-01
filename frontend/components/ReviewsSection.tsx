@@ -3,17 +3,30 @@ import { useRef, useState, useEffect } from "react";
 import { urlFor } from "@/app/lib/sanityClient";
 import MobileCtaBlock from "@/components/MobileCtaBlock";
 
-export default function ReviewsSection({ data }: { data: any }) {
+interface Review {
+  rating?: number;
+  author?: string;
+  comment?: string;
+}
+
+export default function ReviewsSection({ data }: { data: Record<string, unknown> }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Стейт для рандомних 8 карток на мобільці
-  const [randomMobilePhotos, setRandomMobilePhotos] = useState<any[]>([]);
+  const desktopPhotos = (data?.fansPhotos as Record<string, unknown>[])?.slice(0, 22) || [];
+
+  const [mobilePhotos, setMobilePhotos] = useState<Record<string, unknown>[]>(() => 
+    desktopPhotos.slice(0, 8)
+  );
+
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    if (data?.fansPhotos && data.fansPhotos.length > 0) {
-      const shuffled = [...data.fansPhotos].sort(() => 0.5 - Math.random());
-      setRandomMobilePhotos(shuffled.slice(0, 8));
+    const photos = data?.fansPhotos as Record<string, unknown>[];
+    if (!isInitialized.current && photos && photos.length > 0) {
+      isInitialized.current = true;
+      const shuffled = [...photos].sort(() => 0.5 - Math.random());
+      setMobilePhotos(shuffled.slice(0, 8));
     }
   }, [data?.fansPhotos]);
 
@@ -56,31 +69,28 @@ export default function ReviewsSection({ data }: { data: any }) {
     }
   };
 
-  const desktopPhotos = data?.fansPhotos?.slice(0, 22) || [];
-  const mobilePhotos =
-    randomMobilePhotos.length > 0
-      ? randomMobilePhotos
-      : desktopPhotos.slice(0, 8);
+  const reviews = data?.reviews as Review[] | undefined;
 
   return (
-    <section className="w-full py-8 bg-white flex flex-col items-center overflow-hidden">
-      {/* Заголовок і опис */}
-      <div className="max-w-2xl mx-auto text-center mb-10 px-8 md:px-20">
-        <h2 className="text-[26px] md:text-[32px] font-normal text-[#01005B] mb-4 tracking-wide">
-          What are our fans saying?
-        </h2>
-        <p className="text-[15px] md:text-base text-[#676869] leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et
-          felis finibus consequat. Fusce non nibh luctus.
-        </p>
+    <section className="w-full pt-8 pb-9 bg-white flex flex-col items-center overflow-hidden mx-auto">
+      <div className="w-full max-w-7xl mx-auto text-center mb-10 px-6 md:px-20">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-[26px] md:text-[32px] font-normal text-[#01005B] mb-4 tracking-wide">
+            What are our fans saying?
+          </h2>
+          <p className="text-[15px] md:text-base text-[#676869] leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+            lobortis sapien facilisis tincidunt pellentesque. In eget ipsum et
+            felis finibus consequat. Fusce non nibh luctus.
+          </p>
+        </div>
       </div>
 
       <div className="w-full mb-14">
         <div className="grid grid-cols-4 gap-[5px] w-full md:hidden">
-          {mobilePhotos.map((img: any, idx: number) => (
+          {mobilePhotos.map((img: Record<string, unknown>, idx: number) => (
             <div
-              key={img._key || idx}
+              key={(img._key as string) || idx}
               className="w-full aspect-square overflow-hidden bg-stone-200"
             >
               <img
@@ -92,11 +102,11 @@ export default function ReviewsSection({ data }: { data: any }) {
           ))}
         </div>
 
-        <div className="hidden md:grid gap-[5px] grid-cols-11 gap-0 w-full">
+        <div className="hidden md:grid gap-[5px] grid-cols-11 w-full">
           {desktopPhotos.length > 0 ? (
-            desktopPhotos.map((img: any, idx: number) => (
+            desktopPhotos.map((img: Record<string, unknown>, idx: number) => (
               <div
-                key={img._key || idx}
+                key={(img._key as string) || idx}
                 className="w-full aspect-square overflow-hidden bg-stone-200"
               >
                 <img
@@ -114,12 +124,11 @@ export default function ReviewsSection({ data }: { data: any }) {
         </div>
       </div>
 
-      <div className="w-full max-w-6xl px-4 relative flex flex-col items-center mb-10 px-8 md:px-20">
-        <div className="w-full relative flex items-center justify-center px-8 md:px-12">
-  
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-20 relative flex flex-col items-center mb-10">
+        <div className="w-full relative flex items-center justify-center px-6 md:px-12">
           <button
             onClick={() => scrollReviews("left")}
-            className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-20 text-[#676869] hover:text-stone-900 p-2 transition-colors cursor-pointer select-none flex items-center justify-center"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 text-[#676869] hover:text-stone-900 p-2 transition-colors cursor-pointer select-none flex items-center justify-center"
             aria-label="Previous review"
           >
             <svg
@@ -139,15 +148,14 @@ export default function ReviewsSection({ data }: { data: any }) {
             </svg>
           </button>
 
-    
           <div
             ref={scrollContainerRef}
             onScroll={handleScroll}
             className="flex overflow-x-auto gap-6 snap-x snap-mandatory scrollbar-hide scroll-smooth w-full py-2 items-start"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {data?.reviews?.length > 0 ? (
-              data.reviews.map((review: any, index: number) => (
+            {reviews && reviews.length > 0 ? (
+              reviews.map((review: Review, index: number) => (
                 <div
                   key={index}
                   className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start p-6 md:p-8 bg-white border border-[#EAEAEA] rounded-[8px] shadow-[0px_3px_10px_1px_#00000014] flex flex-col justify-between"
@@ -177,10 +185,9 @@ export default function ReviewsSection({ data }: { data: any }) {
             )}
           </div>
 
-
           <button
             onClick={() => scrollReviews("right")}
-            className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-20 text-[#676869] hover:text-stone-900 p-2 transition-colors cursor-pointer select-none flex items-center justify-center"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 text-[#676869] hover:text-stone-900 p-2 transition-colors cursor-pointer select-none flex items-center justify-center"
             aria-label="Next review"
           >
             <svg
@@ -188,7 +195,6 @@ export default function ReviewsSection({ data }: { data: any }) {
               height="18"
               viewBox="0 0 10 18"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M1 1L9 9L1 17"
@@ -201,9 +207,8 @@ export default function ReviewsSection({ data }: { data: any }) {
           </button>
         </div>
 
-
         <div className="flex items-center gap-2 mt-6 md:hidden">
-          {data?.reviews?.map((_: any, idx: number) => (
+          {reviews?.map((_: Review, idx: number) => (
             <button
               key={idx}
               onClick={() => {
@@ -227,13 +232,11 @@ export default function ReviewsSection({ data }: { data: any }) {
         </div>
       </div>
 
-
-
-      <div className="block w-full px-8 ">
+      <div className="w-full px-0 md:px-20 max-w-7xl mx-auto">
         <MobileCtaBlock
-          buttonText={data?.buttonText}
-          buttonLink={data?.buttonLink}
-          reviewsText={data?.reviewsText}
+          buttonText={data?.buttonText as string}
+          buttonLink={data?.buttonLink as string}
+          reviewsText={data?.reviewsText as string}
         />
       </div>
     </section>

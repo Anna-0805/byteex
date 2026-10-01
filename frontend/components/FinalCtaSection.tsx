@@ -3,8 +3,38 @@
 import Link from "next/link";
 import { urlFor } from "@/app/lib/sanityClient";
 import MobileCtaBlock from "@/components/MobileCtaBlock";
+import PerkItem from "@/components/PerkItem"; 
 
-export default function FinalCtaSection({ data }: { data?: any }) {
+interface Perk {
+  title?: string;
+  description?: string;
+  icon?: Record<string, unknown>;
+}
+
+interface FinalCtaSectionProps {
+  data?: {
+    finalCtaSection?: {
+      title?: string;
+      subtitle?: string;
+      buttonText?: string;
+      buttonLink?: string;
+      reviewsText?: string;
+      perks?: Perk[];
+      imageLeft?: Record<string, unknown>;
+      imageCenter?: Record<string, unknown>;
+      imageRight?: Record<string, unknown>;
+      paymentIcons?: Record<string, unknown>;
+    };
+  };
+}
+
+const imageStyles = [
+  "absolute top-[30px] left-[50px] md:left-[72px] w-[97px] md:w-[209px] h-[147px] md:h-[316px] object-cover border border-[#EDEDED] shadow-[0px_3px_10px_1px_#00000014] md:border-0 md:shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10",
+  "absolute top-0 left-1/2 -translate-x-1/2 w-[139px] md:w-[246px] h-[211px] md:h-[373px] object-cover border-[2px] border-[#EDEDED] md:border-0 shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-20",
+  "absolute top-[30px] right-[50px] md:right-[72px] w-[97px] md:w-[209px] h-[147px] md:h-[316px] object-cover border-[#EDEDED] shadow-[0px_3px_10px_1px_#00000014] md:border-[#F0EEEF] md:shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10",
+];
+
+export default function FinalCtaSection({ data }: FinalCtaSectionProps) {
   const ctaSection = data?.finalCtaSection;
 
   const title = ctaSection?.title || "Find something you love.";
@@ -22,16 +52,16 @@ export default function FinalCtaSection({ data }: { data?: any }) {
     ctaSection?.imageLeft,
     ctaSection?.imageCenter,
     ctaSection?.imageRight,
-  ].filter(Boolean);
+  ].filter(Boolean) as Record<string, unknown>[];
 
   return (
-    <section className="w-full bg-[linear-gradient(180deg,_rgba(249,240,229,0)_50%,_rgba(249,240,229,0.18)_78.5%,_#F9F0E5_100%)] py-20 px-6 relative overflow-hidden font-sans">
+    <section className="w-full bg-[linear-gradient(180deg,_rgba(249,240,229,0)_50%,_rgba(249,240,229,0.18)_78.5%,_#F9F0E5_100%)] pt-12 pb-8 px-6 relative overflow-hidden font-sans">
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         <h2 className="text-[26px] md:text-[32px] font-normal text-[#01005B] mb-[18px] md:mb-[35px] tracking-wide">
           {title}
         </h2>
 
-        <p className="text-[15px] text-[#676869] max-w-lg mb-12 leading-relaxed block md:hidden">
+        <p className="text-[15px] text-[#676869] max-w-lg mb-6 leading-relaxed block md:hidden">
           Click below to browse our collection!
         </p>
         <p className="text-[15px] text-[#676869] max-w-lg mb-0 md:mb-12 leading-relaxed hidden md:block">
@@ -43,25 +73,17 @@ export default function FinalCtaSection({ data }: { data?: any }) {
           <div className="absolute top-1/2 -right-[1px] md:-right-[30px] -translate-y-1/2 w-[67px] md:w-[139px] h-[95px] md:h-[196px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] z-0 pointer-events-none block" />
 
           {collageImages.length > 0 ? (
-            collageImages.map((img: any, idx: number) => {
-              const imageStyles = [
-                "absolute top-[30px] left-[50px] md:left-[72px] w-[97px] md:w-[209px] h-[147px] md:h-[316px] object-cover border border-[#EDEDED] shadow-[0px_3px_10px_1px_#00000014] md:border-0 md:shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10",
-                "absolute top-0 left-1/2 -translate-x-1/2 w-[139px] md:w-[246px] h-[211px] md:h-[373px] object-cover border-[2px] border-[#EDEDED] md:border-0 shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-20",
-                "absolute top-[30px] right-[50px] md:right-[72px] w-[97px] md:w-[209px] h-[147px] md:h-[316px] object-cover border-[#EDEDED] shadow-[0px_3px_10px_1px_#00000014] md:border-[#F0EEEF] md:shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10",
-              ];
-
-              return (
-                <img
-                  key={img._key || idx}
-                  src={urlFor(img).url()}
-                  alt={`Collage image ${idx + 1}`}
-                  className={imageStyles[idx % imageStyles.length]}
-                />
-              );
-            })
+            collageImages.map((img: Record<string, unknown>, idx: number) => (
+              <img
+                key={(img._key as string) || idx}
+                src={urlFor(img).url()}
+                alt={`Collage image ${idx + 1}`}
+                className={imageStyles[idx % imageStyles.length]}
+              />
+            ))
           ) : (
             <div className="absolute inset-0 flex items-center justify-center text-stone-400 text-sm">
-              Завантаження зображень...
+              Loading images...
             </div>
           )}
         </div>
@@ -89,7 +111,6 @@ export default function FinalCtaSection({ data }: { data?: any }) {
         <div className="hidden md:flex w-full max-w-full px-4 flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] tracking-[0.04em] font-normal text-[#1FAD40] py-2 z-30 relative">
           <div className="flex items-center gap-1.5 font-medium">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
@@ -113,12 +134,12 @@ export default function FinalCtaSection({ data }: { data?: any }) {
             />
           ) : (
             <span className="text-gray-400 text-xs">
-              Додайте зображення платіжних систем в Sanity
+              Add payment system images to Sanity.
             </span>
           )}
         </div>
 
-        <div className="block md:hidden w-full">
+        <div className="block md:hidden w-[calc(100%+48px)] -mx-6">
           <MobileCtaBlock
             buttonText={buttonText}
             buttonLink={buttonLink}
@@ -128,34 +149,9 @@ export default function FinalCtaSection({ data }: { data?: any }) {
 
         <div className="hidden md:flex flex-col items-center mt-[24px] w-full">
           <div className="grid grid-cols-3 gap-8 pt-8 w-full max-w-[700px] text-left">
-            {perks.map((perk: any, index: number) => {
-              const iconUrl = perk.icon ? urlFor(perk.icon).url() : null;
-
-              return (
-                <div key={index} className="flex items-start gap-3 relative">
-                  {index < 2 && (
-                    <div className="absolute -right-4 top-1/2 -translate-y-1/2 w-[1px] h-[51px] bg-[#C4C4C4]/40" />
-                  )}
-                  {iconUrl && (
-                    <div className="w-[33px] h-[33px] flex-shrink-0 flex items-center justify-center bg-[#6666661A] rounded-full">
-                      <img
-                        src={iconUrl}
-                        alt={perk.title || "Perk icon"}
-                        className="w-5 h-5 object-contain grayscale opacity-70"
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <h4 className="text-xs font-semibold text-[#01005B] mb-1">
-                      {perk.title}
-                    </h4>
-                    <p className="text-[14px] leading-[20px] text-[#676869]">
-                      {perk.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+            {perks.map((perk: Perk, index: number) => (
+              <PerkItem key={index} perk={perk} index={index} />
+            ))}
           </div>
         </div>
       </div>
