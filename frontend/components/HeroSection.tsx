@@ -26,7 +26,6 @@ export default function HeroSection({ data }: HeroSectionProps) {
       )}
 
       <div className="w-full max-w-7xl mx-auto px-8 md:px-20 flex flex-col">
-        {/* 1. ЛОГОТИП */}
         <div className="flex justify-center md:justify-start pt-[14px] md:pt-[33px] pb-2 md:pb-6">
           {data?.logo ? (
             <img
@@ -52,7 +51,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             {collageImages.length > 0 ? (
               collageImages.slice(0, 3).map((img: any, idx: number) => {
                 const wrapperStyles = [
-                  // Левая карточка
+             
                   "absolute top-[55px] left-1/2 -translate-x-1/2 bg-stone-200 border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 " +
                     "w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] " +
                     "-ml-[120px] lg:-ml-[170px] xl:-ml-[225px]",
@@ -61,16 +60,15 @@ export default function HeroSection({ data }: HeroSectionProps) {
                     "w-[136px] lg:w-[200px] xl:w-[260px] h-[221px] lg:h-[320px] xl:h-[422px] " +
                     "border-[2.5px] border-[#EDEDED] lg:border-0",
 
-                  // Правая карточка
                   "absolute top-[55px] left-1/2 -translate-x-1/2 bg-stone-200 border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 " +
                     "w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] " +
                     "ml-[120px] lg:ml-[170px] xl:ml-[225px]",
                 ];
 
                 const leftGradientTranslate =
-                  "translate-x-[25px] lg:translate-x-[30px] xl:translate-x-[37px]";
+                  "translate-x-[25px] lg:translate-x-[30px] xl:translate-x-[57px]";
                 const rightGradientTranslate =
-                  "-translate-x-[25px] lg:-translate-x-[30px] xl:-translate-x-[37px]";
+                  "-translate-x-[25px] lg:-translate-x-[30px] xl:-translate-x-[57px]";
 
                 return (
                   <div
@@ -105,7 +103,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             )}
           </div>
 
-          <div className="order-3 md:col-start-1 md:col-end-2 w-full flex flex-col items-start  px-12 md:px-0">
+          <div className="order-3 md:col-start-1 md:col-end-2 w-full flex flex-col items-start px-12 md:px-0">
             <ul className="mt-[4px] md:mt-[32px] space-y-[26px] md:space-y-[18px] w-full">
               {data?.features?.length > 0
                 ? data.features.map((feature: any, index: number) => (

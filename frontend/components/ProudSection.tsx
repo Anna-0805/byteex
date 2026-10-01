@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { urlFor } from "@/app/lib/sanityClient";
 import MobileCtaBlock from "@/components/MobileCtaBlock";
 
