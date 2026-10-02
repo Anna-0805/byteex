@@ -11,7 +11,7 @@ interface MobileCtaBlockProps {
 
 export default function MobileCtaBlock({
   buttonText = "Customize Your Outfit",
-  buttonLink = "/customize",
+  buttonLink = "#",
   reviewsText = "Over 500+ 5 Star Reviews Online",
 }: MobileCtaBlockProps) {
   return (

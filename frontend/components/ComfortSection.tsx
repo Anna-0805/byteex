@@ -94,11 +94,11 @@ export default function ComfortSection({ data }: { data: Record<string, unknown>
         )}
       </div>
 
-      <div className="block w-full">
+     <div className="block w-full">
         <MobileCtaBlock
-          buttonText={data?.buttonText}
-          buttonLink={data?.buttonLink}
-          reviewsText={data?.reviewsText}
+          buttonText={data?.buttonText as string | undefined}
+          buttonLink={data?.buttonLink as string | undefined}
+          reviewsText={data?.reviewsText as string | undefined}
         />
       </div>
     </section>
