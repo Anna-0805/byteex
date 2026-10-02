@@ -6,21 +6,22 @@ This is a high-performance product landing page built in fulfillment of the Byte
 - **URL:** [https://byteex-yn48.vercel.app]
 
 ## Tech Stack
-- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS v4
-- **CMS:** Sanity v3 (Headless CMS)
-- **Deployment & Grounding:** Server Components with on-demand caching
+- **Frontend & App Architecture:** Next.js ( React 19, TypeScript)
+- **Styling:** Tailwind CSS v4, custom SCSS/CSS modules
+- **CMS:** Sanity v3 (`next-sanity`) integrated directly into the app structure
+- **Deployment:** Vercel
 
 ## Installation & Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-github-repository-url>
-   cd <project-folder-name>
+   git clone https://github.com/Anna-0805/byteex.git
+   cd frontend
    ```
 
 2. **Install dependencies:**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 3. **Set up Environment Variables:**
@@ -35,8 +36,10 @@ This is a high-performance product landing page built in fulfillment of the Byte
    npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   Open [http://localhost:3000/studio](http://localhost:3000/studio) to access the embedded Sanity Studio admin panel.
 
 ##  Project Structure
 - `/app` - Next.js App Router pages and global styles (Tailwind v4 layout)
+- `/sanity` - Sanity configuration files, schemas, and content definitions
 - `/components` - Isolated, reusable UI sections (Hero, Proud, FAQ, FinalCTA)
 - `/public` - Local assets, including the `Sofia Pro` typography configuration
