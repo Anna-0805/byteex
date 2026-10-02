@@ -68,7 +68,7 @@ export default function FinalCtaSection({ data }: FinalCtaSectionProps) {
           {subtitle}
         </p>
 
-        <div className="relative w-full max-w-[815px] md:h-[373px] h-[215px] mx-auto mb-12 select-none">
+        <div className="relative w-full max-w-[420px] md:max-w-[815px] md:h-[373px] h-[215px] mx-auto mb-12 select-none">
           <div className="absolute top-1/2 -left-[1px] md:-left-[30px] -translate-y-1/2 w-[67px] md:w-[139px] h-[95px] md:h-[196px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] z-0 pointer-events-none block" />
           <div className="absolute top-1/2 -right-[1px] md:-right-[30px] -translate-y-1/2 w-[67px] md:w-[139px] h-[95px] md:h-[196px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] z-0 pointer-events-none block" />
 
