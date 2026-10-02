@@ -70,9 +70,9 @@ export default function HeroSection({ data }: HeroSectionProps) {
             {collageImages.length > 0 ? (
               collageImages.slice(0, 3).map((img: any, idx: number) => {
                 const wrapperStyles = [
-                  "absolute top-[55px] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] -ml-[120px] lg:-ml-[170px] xl:-ml-[225px]",
+                  "absolute top-[10%] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] -ml-[120px] lg:-ml-[170px] xl:-ml-[225px]",
                   "absolute top-0 left-1/2 -translate-x-1/2 bg-white shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-20 w-[136px] lg:w-[200px] xl:w-[260px] h-[221px] lg:h-[320px] xl:h-[422px] border-[2.5px] border-[#EDEDED]",
-                  "absolute top-[55px] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] ml-[120px] lg:ml-[170px] xl:ml-[225px]",
+                  "absolute  top-[10%] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] ml-[120px] lg:ml-[170px] xl:ml-[225px]",
                 ];
 
                 const leftGradientTranslate = "translate-x-[25px] lg:translate-x-[30px] xl:translate-x-[57px]";
