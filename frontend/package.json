@@ -11,9 +11,15 @@
   "dependencies": {
     "@sanity/client": "^8.8.0",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/structure": "^2.36.2",
+    "@sanity/vision": "^6.17.0",
     "next": "16.3.7",
+    "next-sanity": "^13.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sanity": "^6.17.0",
+    "styled-components": "^6.5.3",
+    "swr": "2.2.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -24,5 +30,8 @@
     "eslint-config-next": "16.3.7",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "swr": "2.2.5"
   }
 }
