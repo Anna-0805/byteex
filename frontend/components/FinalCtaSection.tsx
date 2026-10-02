@@ -42,7 +42,7 @@ export default function FinalCtaSection({ data }: FinalCtaSectionProps) {
     ctaSection?.subtitle ||
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
   const buttonText = ctaSection?.buttonText || "Customize Your Outfit";
-  const buttonLink = ctaSection?.buttonLink || "/customize";
+  const buttonLink = ctaSection?.buttonLink || "#";
   const reviewsText =
     ctaSection?.reviewsText || "Over 500+ 5 Star Reviews Online";
 
