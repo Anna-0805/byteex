@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { urlFor } from "@/app/lib/sanityClient";
 import MobileCtaBlock from "@/components/MobileCtaBlock";
 
+
 interface Review {
   rating?: number;
   author?: string;
@@ -118,7 +119,7 @@ export default function ReviewsSection({ data }: { data: Record<string, unknown>
             ))
           ) : (
             <div className="col-span-full text-center text-stone-400 text-sm py-8">
-              Завантаження галереї...
+              Loading gallery...
             </div>
           )}
         </div>
@@ -180,7 +181,7 @@ export default function ReviewsSection({ data }: { data: Record<string, unknown>
               ))
             ) : (
               <div className="w-full text-center text-stone-400 text-sm py-8">
-                Відгуки відсутні
+                Reviews unavailable
               </div>
             )}
           </div>
@@ -207,29 +208,35 @@ export default function ReviewsSection({ data }: { data: Record<string, unknown>
           </button>
         </div>
 
-        <div className="flex items-center gap-2 mt-6 md:hidden">
-          {reviews?.map((_: Review, idx: number) => (
-            <button
-              key={idx}
-              onClick={() => {
-                const container = scrollContainerRef.current;
-                if (container) {
-                  const card = container.children[idx] as HTMLElement;
-                  if (card) {
-                    container.scrollTo({
-                      left: card.offsetLeft - container.offsetLeft,
-                      behavior: "smooth",
-                    });
-                  }
-                }
-              }}
-              className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                activeIndex === idx ? "bg-stone-900" : "bg-stone-300"
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
+         {reviews && reviews.length > 0 && (
+          <div className="flex items-center gap-2 mt-6 md:hidden">
+            {reviews.slice(0, 3).map((_, idx: number) => {
+              const isSelected = activeIndex % 3 === idx;
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    const container = scrollContainerRef.current;
+                    if (container) {
+                      const card = container.children[idx] as HTMLElement;
+                      if (card) {
+                        container.scrollTo({
+                          left: card.offsetLeft - container.offsetLeft,
+                          behavior: "smooth",
+                        });
+                      }
+                    }
+                  }}
+                  className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                    isSelected ? "bg-stone-900" : "bg-stone-300"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div className="w-full px-0 md:px-20 max-w-7xl mx-auto">
