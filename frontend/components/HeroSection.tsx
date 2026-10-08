@@ -45,7 +45,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
       )}
 
       
-      <div className="w-full max-w-7xl mx-auto px-8 md:px-20 flex flex-col">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-20 flex flex-col">
         <div className="flex justify-center md:justify-start pt-[14px] md:pt-[33px] pb-2 md:pb-6">
           {data?.logo ? (
             <img
@@ -104,7 +104,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             )}
           </div>
 
-          <div className="order-3 md:col-start-1 md:col-end-2 w-full flex flex-col items-start px-12 md:px-0">
+          <div className="order-3 md:col-start-1 md:col-end-2 w-full flex flex-col items-start px-4 md:px-0">
             <HeroFeatures features={data?.features} />
           </div>
 
@@ -118,7 +118,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
               <img
                 src="/arrow.svg"
                 alt="arrow"
-                className="absolute right-6 w-[24px] h-[16px] translate-y-[8px] object-contain"
+                className="absolute right-6 w-[24px] h-[16px] translate-y-[12px] object-contain"
               />
             </a>
           </div>
