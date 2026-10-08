@@ -16,7 +16,7 @@ export default function HeroReviewCard({
     "Overjoyed with my Loungewear set. I have the jogger and the sweatshirt. Quality product on every level. From the compostable packaging, to the supplied washing bag, even the garments smells like fresh herbs when I first held them.";
 
   return (
-    <div className="w-full md:w-[356px] p-4 bg-white border border-stone-200 rounded-lg shadow-sm">
+    <div className="w-full md:w-[416px] p-4 bg-white border border-stone-200 rounded-lg shadow-sm">
       <div className="flex items-center gap-3 mb-2">
         <div className="w-10 h-10 rounded-full bg-stone-300 overflow-hidden flex-shrink-0">
           <img

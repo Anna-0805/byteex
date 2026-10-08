@@ -123,7 +123,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
             </a>
           </div>
       
-          <div className="order-5 w-full flex flex-col items-start mt-6 md:mt-4 -mb-16 md:-mb-24 relative z-40">
+          <div className="order-5 w-full flex flex-col items-start mt-8 md:mt-10 -mb-16 md:-mb-24 relative z-40">
             <HeroReviewCard
               reviewTextMobile={data?.heroReviewTextMobile}
               desktopComment={data?.reviews?.[0]?.comment}
