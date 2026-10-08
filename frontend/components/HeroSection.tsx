@@ -118,7 +118,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
               <img
                 src="/arrow.svg"
                 alt="arrow"
-                className="absolute right-6 w-[24px] h-[16px] translate-y-[12px] object-contain"
+                className="absolute right-6 w-[24px] h-[16px] md:translate-y-[12px] object-contain"
               />
             </a>
           </div>
