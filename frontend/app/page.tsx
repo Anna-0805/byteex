@@ -124,7 +124,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 flex flex-col items-center">
+    <div className="min-h-screen bg-white font-sans text-slate-900 flex flex-col items-center overflow-x-hidden">
       <main className="w-full flex flex-col items-center">
   
         <HeroSection data={data} />

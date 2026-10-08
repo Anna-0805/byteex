@@ -34,7 +34,7 @@ export default function ProudFeatureItem({ feature, isMobile = false }: ProudFea
         <h3 className="text-[#01005B] text-[20px] font-normal mb-2 tracking-wide">
           {feature.title}
         </h3>
-        <p className="text-[14px] text-[#676869] max-w-md leading-relaxed">
+        <p className="text-[14px] text-[#676869] max-w-md leading-relaxed px-2">
           {feature.description}
         </p>
       </div>

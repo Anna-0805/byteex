@@ -44,6 +44,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
         </div>
       )}
 
+      
       <div className="w-full max-w-7xl mx-auto px-8 md:px-20 flex flex-col">
         <div className="flex justify-center md:justify-start pt-[14px] md:pt-[33px] pb-2 md:pb-6">
           {data?.logo ? (
@@ -66,13 +67,13 @@ export default function HeroSection({ data }: HeroSectionProps) {
             </h1>
           </div>
 
-          <div className="order-2 md:col-start-2 md:col-end-3 md:row-span-4 relative flex items-center justify-center w-full max-w-[725px] md:h-[422px] h-[215px] mx-auto my-6 md:my-0 isolate">
+          <div className="order-2 md:col-start-2 md:col-end-3 md:row-span-4 relative flex items-center justify-center w-full max-w-[725px] md:h-[422px] h-[225px] mx-auto my-6 md:my-0 isolate">
             {collageImages.length > 0 ? (
               collageImages.slice(0, 3).map((img: any, idx: number) => {
                 const wrapperStyles = [
-                  "absolute top-[10%] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] -ml-[120px] lg:-ml-[170px] xl:-ml-[225px]",
+                  "absolute top-[10%] left-1/2 -translate-x-1/2 -ml-[105px] md:-ml-[120px] lg:-ml-[170px] xl:-ml-[225px] bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px]",
                   "absolute top-0 left-1/2 -translate-x-1/2 bg-white shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-20 w-[136px] lg:w-[200px] xl:w-[260px] h-[221px] lg:h-[320px] xl:h-[422px] border-[2.5px] border-[#EDEDED]",
-                  "absolute  top-[10%] left-1/2 -translate-x-1/2 bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px] ml-[120px] lg:ml-[170px] xl:ml-[225px]",
+                  "absolute top-[10%] left-1/2 -translate-x-1/2 ml-[105px] md:ml-[120px] lg:ml-[170px] xl:ml-[225px] bg-white border border-[#E6E6E6] shadow-[0px_3px_10px_1px_rgba(0,0,0,0.08)] z-10 w-[109px] lg:w-[160px] xl:w-[209px] h-[165px] lg:h-[240px] xl:h-[316px]"
                 ];
 
                 const leftGradientTranslate = "translate-x-[25px] lg:translate-x-[30px] xl:translate-x-[57px]";
@@ -81,7 +82,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
                 return (
                   <div key={img._key || idx} className={wrapperStyles[idx % wrapperStyles.length]}>
                     {idx === 0 && (
-                      <div className={`absolute top-1/2 right-full -translate-y-1/2 ${leftGradientTranslate} w-[70px] lg:w-[100px] xl:w-[134px] h-[99px] lg:h-[140px] xl:h-[189px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] -z-10 pointer-events-none block`} />
+                      <div className={`absolute top-1/2 right-full -translate-y-1/2 ${leftGradientTranslate} w-[70px] lg:w-[100px] xl:w-[134px] h-[99px] lg:h-[140px] xl:h-[189px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] -z-10 pointer-events-none hidden md:block`} />
                     )}
                     <div className="w-full h-full overflow-hidden relative z-10">
                       <img
@@ -91,7 +92,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
                       />
                     </div>
                     {idx === 2 && (
-                      <div className={`absolute top-1/2 left-full -translate-y-1/2 ${rightGradientTranslate} w-[70px] lg:w-[100px] xl:w-[134px] h-[99px] lg:h-[140px] xl:h-[189px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] -z-10 pointer-events-none block`} />
+                      <div className={`absolute top-1/2 left-full -translate-y-1/2 ${rightGradientTranslate} w-[70px] lg:w-[100px] xl:w-[134px] h-[99px] lg:h-[140px] xl:h-[189px] bg-gradient-to-b from-[#F9F0E5]/[0.217] to-[#F9F0E5]/[0.7] -z-10 pointer-events-none hidden md:block`} />
                     )}
                   </div>
                 );
@@ -121,7 +122,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
               />
             </a>
           </div>
-
+      
           <div className="order-5 w-full flex flex-col items-start mt-6 md:mt-4 -mb-16 md:-mb-24 relative z-40">
             <HeroReviewCard
               reviewTextMobile={data?.heroReviewTextMobile}

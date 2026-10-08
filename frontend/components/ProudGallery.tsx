@@ -44,7 +44,7 @@ export default function ProudGallery({ proudGallery = [] }: ProudGalleryProps) {
           </svg>
         </button>
 
-        <div className="relative w-full min-w-[303px] max-w-[433px] h-[453px] md:h-[648px] overflow-hidden shadow-md bg-stone-200">
+        <div className="relative w-full min-w-[250px] max-w-[433px] h-[453px] md:h-[648px] overflow-hidden shadow-md bg-stone-200">
           <div className="w-full h-full flex items-center justify-center bg-stone-300">
             {galleryLength > 0 ? (
               <img
